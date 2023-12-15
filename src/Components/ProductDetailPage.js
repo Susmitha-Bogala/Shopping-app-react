@@ -36,6 +36,18 @@ const ProductDetailPage = (props) => {
             </h1>
 
             <p>{item.description}</p>
+            <button
+              onClick={() => {}}
+              style={{ alignSelf: "flex-end", padding: 5, margin: 5 }}
+            >
+              Add to cart
+            </button>
+            <button
+              onClick={() => {}}
+              style={{ alignSelf: "flex-end", padding: 5, margin: 5 }}
+            >
+              Buy now
+            </button>
           </div>
           <div style={{ flex: 0.2 }}>
             <h1>${item.price}USD</h1>

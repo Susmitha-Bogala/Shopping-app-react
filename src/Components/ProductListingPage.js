@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import SearchComponent from "./searchComponent";
 
 export default function ProductListingPage() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch("https://dummyjson.com/products")
-      .then((res) => res.json())
-      .then((response) => setData(response.products));
-  }, []);
+    // fetch("https://dummyjson.com/products")
+    //   .then((res) => res.json())
+    //   .then((response) => setData(response.products));
+  }, [data]);
 
   const navigate = useNavigate();
 
@@ -16,19 +17,25 @@ export default function ProductListingPage() {
     navigate("/ProductDetailPage", { state: { data: data[index] } });
   };
 
+  const updateDataOnsearch = (updatedData) => {
+    setData(updatedData);
+  };
   console.log("data", data);
 
   return (
     <div>
-      <h1
-        style={{
-          color: "blue",
-          padding: 10,
-          // borderBottom: "3px solid rgb(212, 212, 212)",
-        }}
-      >
-        Product Listing page
-      </h1>
+      <SearchComponent updateDataOnsearch={updateDataOnsearch} />
+      {data.length > 0 && (
+        <h1
+          style={{
+            color: "blue",
+            padding: 10,
+            // borderBottom: "3px solid rgb(212, 212, 212)",
+          }}
+        >
+          Product Listing page
+        </h1>
+      )}
       {data.map((item, index) => {
         return (
           <div
@@ -58,6 +65,18 @@ export default function ProductListingPage() {
                 </h1>
 
                 <p>{item.description}</p>
+                <button
+                  onClick={() => {}}
+                  style={{ alignSelf: "flex-end", padding: 5, margin: 5 }}
+                >
+                  Add to cart
+                </button>
+                <button
+                  onClick={() => {}}
+                  style={{ alignSelf: "flex-end", padding: 5, margin: 5 }}
+                >
+                  Buy now
+                </button>
               </div>
               <div style={{ flex: 0.2 }}>
                 <h1>${item.price}USD</h1>
